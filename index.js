@@ -9,8 +9,11 @@ var vod=new comedy();
       app.use(bodyParser.json());
       app.use(bodyParser.urlencoded({extended:true}));
       
+      app.use('/images',express.static(`${__dirname}/images`))
+
       app.get('/', (req,res) => {
-        res.send("hello");
+        console.log(`${__dirname}`);
+        res.sendFile(`${__dirname}/index.html`);
       });
 
       app.get('/getAllMovies',(req,res)=>{
