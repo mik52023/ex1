@@ -1,6 +1,4 @@
-const data = require('./data/comedy.json'),
-      moment = require('moment');
-      moment().format();
+const data = require('./data/comedy.json');
 
 //  moment().format("DD/MM/YYYY");    
 module.exports= class comedy_vod

@@ -8,7 +8,11 @@ var vod=new comedy();
 
       app.use(bodyParser.json());
       app.use(bodyParser.urlencoded({extended:true}));
-    
+      
+      app.get('/', (req,res) => {
+        res.send("hello");
+      });
+
       app.get('/getAllMovies',(req,res)=>{
        
 
@@ -28,7 +32,7 @@ var vod=new comedy();
         res.status(200).send("function was not found");
       }); 
 
-      app.listen(port,()=>{console.log('listening to port ${port}')});
+      app.listen(port,()=>{console.log(`listening to port ${port}`)});
 
       
       
