@@ -9,7 +9,7 @@ var vod=new comedy();
       app.use(bodyParser.json());
       app.use(bodyParser.urlencoded({extended:true}));
       app.use(express.static(`${__dirname}`));
-      app.use('/images',express.static(`${__dirname}/images`));
+
       app.get('/', (req,res) => {
         console.log(`${__dirname}`);
         res.sendFile(`${__dirname}/index.html`);
