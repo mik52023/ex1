@@ -1,21 +1,36 @@
-const data = require('./data/comedy.json');
+var mongoose = require('mongoose'),
+    consts=require('./data/const.js');  
+var Movie=require('./movieB.js');
 
-//  moment().format("DD/MM/YYYY");    
 module.exports= class comedy_vod
 {
-Get_all_movies(){
 
-var movies=[];
+// recieves location and destination response 
+// and sends json with all movies related to that location
+Get_all_movies_by_location(location,res){
 
+var shows=[];
 
-for(let i in data){
+mongoose.connect(consts.mlab_key);
+var conn = mongoose.connection;//get default connection
+conn.on('error',
+(err) => {
+console.log(`connection error: ${err}`);
+});
+conn.once('open',
+() => {
+Movie.find({location:`${location}`},(err,user)=>{
+    if(err) console.log(`query error:${err}`);
+mongoose.disconnect();
+for(let i in user){
 
-    movies[i]=data[i].movie;
+    shows[i]=user[i];
+        }
+res.status(200).json(shows); 
+});
+});
 }
-
-return movies; 
-}
-
+/*
 Get_movies_by_id(id){
 
 var info;
@@ -41,5 +56,5 @@ for(let i in data){
 if(!info[0]) info="no movies were found between those years";       
  return info;
 }
-
+*/
 }

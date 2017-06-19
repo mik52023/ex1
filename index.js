@@ -9,18 +9,13 @@ var vod=new comedy();
       app.use(bodyParser.json());
       app.use(bodyParser.urlencoded({extended:true}));
       app.use(express.static(`${__dirname}`));
-
-      app.get('/', (req,res) => {
-        console.log(`${__dirname}`);
-        res.sendFile(`${__dirname}/index.html`);
-      });
-
-      app.get('/getAllMovies',(req,res)=>{
-       
-
-       res.status(200).json(vod.Get_all_movies()); 
+//get location from client and send the players movies
+       app.get('/getAllMovies',(req,res)=>{ 
+       console.log(`${req.query.location}`); 
+       vod.Get_all_movies_by_location(req.query.location,res); 
         });
 
+/*
       app.post('/getMovieData',(req,res)=>{
         console.log('searching by id ${req.body.id}');
         res.status(200).json(vod.Get_movies_by_id(req.body.id));
@@ -29,7 +24,8 @@ var vod=new comedy();
 
       app.post('/getMovieByYears',(req,res)=>{
        res.status(200).json(vod.Get_movies_by_years(req.body.start,req.body.end));
-      }); 
+      }); */
+      
       app.all('*',(req,res)=>{
         res.status(200).send("function was not found");
       }); 
